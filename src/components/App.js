@@ -16,13 +16,13 @@ export default function App() {
                         <Welcome />
                     </Route>
                     <Route path="/products/all" exact>
-                        <Catalog category={"all"} />
+                        <Catalog pageTitle={"Todos os clubes"}/>
                     </Route>
                     <Route path="/products/national" exact>
-                        <Catalog category={"national"} />
+                        <Catalog category={"Nacional"} pageTitle={"Clubes brasileiros"}/>
                     </Route>
                     <Route path="/products/international" exact>
-                        <Catalog category={"international"} />
+                        <Catalog category={"Internacional"} pageTitle={"Clubes internacionais"}/>
                     </Route>
                 </Switch>
             </BrowserRouter>
