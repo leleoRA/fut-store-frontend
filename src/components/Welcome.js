@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom';
 
-import Header from "./Header.js";
+import Header from "./Header/Header.js";
 
 export default function Welcome() {
     const history = useHistory();
@@ -35,16 +35,19 @@ const Body = styled.div`
 `;
 
 const WelcomeMsg = styled.div`
-    height: 60px;
+    height: 70px;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    h1 {
+        color: darkgreen;
+    }
     button {
         font-size: inherit;
         background: none;
         border: none;
-        color: darkgreen;
+        color: lightgreen;
         cursor: pointer;
         :hover {
             opacity: .7;
@@ -53,7 +56,7 @@ const WelcomeMsg = styled.div`
 `;
 
 const Categories = styled.div`
-    height: calc(100vh - 120px);
+    height: calc(100vh - 130px);
     width: 100vw;
     display: flex;
     background: #000000;
