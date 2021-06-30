@@ -4,7 +4,7 @@ export default function Header() {
     return(
         <Body>
             <UserMenu>Usuário</UserMenu>
-            <Logo>Fut-Store</Logo>
+            <Logo>Netshirts</Logo>
             <Cart>Carrinho</Cart>
         </Body>
     )

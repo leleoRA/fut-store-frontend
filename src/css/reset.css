@@ -85,6 +85,11 @@ video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+button{
+    font-family: 'Rajdhani', sans-serif;
 }
 
 article,
@@ -126,4 +131,8 @@ q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+* {
+    box-sizing: border-box;
 }

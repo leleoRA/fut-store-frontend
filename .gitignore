@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/imagesHardCoded
 .pnp.js
 
 # testing
