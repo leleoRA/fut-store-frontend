@@ -2,8 +2,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import UserContext from './contexts/UserContext';
 import { useState } from "react";
 
-import Welcome from "./Welcome";
-import Catalog from "./Catalog";
+import Welcome from "./Welcome.js";
+import LogIn from "./header/LogIn.js";
+import SignUp from "./header/SignUp.js";
+import Catalog from "./Catalog.js";
 import Product from "./Product";
 
 export default function App() {
@@ -15,6 +17,12 @@ export default function App() {
                 <Switch>
                     <Route path="/" exact>
                         <Welcome />
+                    </Route>
+                    <Route path="/login" exact>
+                        <LogIn />
+                    </Route>
+                    <Route path="/signup" exact>
+                        <SignUp />
                     </Route>
                     <Route path="/products/all" exact>
                         <Catalog pageTitle={"Todos os clubes"}/>

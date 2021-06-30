@@ -3,7 +3,7 @@ import { GiBrazilFlag, GiEarthAfricaEurope } from "react-icons/gi";
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
-import Header from "./Header.js";
+import Header from "./header/Header.js";
 import Footer from './Footer.js';
 
 export default function Catalog(props) {
