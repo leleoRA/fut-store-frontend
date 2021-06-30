@@ -14,7 +14,7 @@ export default function Welcome() {
         <Body>
             <Header />
             <WelcomeMsg>
-                <h1>Bem vindo à Fut-Store! Escolha uma categoria abaixo ou clique <button onClick={()=> goTo('/products/all')}>aqui</button> para ver todos os nossos produtos.</h1>
+                <h1>Bem vindo à NetShirts! Escolha uma categoria abaixo ou clique <button onClick={()=> goTo('/products/all')}>aqui</button> para ver todos os nossos produtos.</h1>
             </WelcomeMsg>
             <Categories>
                 <Category url={"https://esportems.com.br/site/wp-content/uploads/2020/06/1-maracana.jpg"} onClick={()=> goTo('/products/national')}>
