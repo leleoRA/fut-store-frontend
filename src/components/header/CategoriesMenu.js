@@ -38,22 +38,23 @@ const Menu = styled.div`
     left: 20px;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
+    background: #438a0a;
     border: thin;
     border-radius: 5px;
     button {
         width: 120px;
-        background: none;
+        background: #53961d;
         border: none;
+        border-radius: 3px;
         cursor: pointer;
-        color: green;
+        color: #FFFFFF;
         padding: 5px;
     }
 `;
 
 const Category = styled.div`
-    background: #F7F7F7;
-    border-radius: ${props => props.last ? "0px 0px 5px 5px" : "0"};
+    background: #53961d;
+    border-radius: ${props => props.last ? "0px 0px 3px 3px" : "0"};
     :hover {
         opacity: .7;
     }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom';
 
-import Header from "./Header/Header.js";
+import Header from "./header/Header.js";
 
 export default function Welcome() {
     const history = useHistory();
@@ -40,7 +40,9 @@ const WelcomeMsg = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #F2F2F2;
     h1 {
+        font-size: 18px;
         color: darkgreen;
     }
     button {

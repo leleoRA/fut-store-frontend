@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Header from "./Header/Header.js";
+import Header from "./header/Header.js";
 
 export default function Catalog() {
     return(

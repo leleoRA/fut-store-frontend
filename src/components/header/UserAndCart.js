@@ -1,38 +1,54 @@
 import styled from 'styled-components';
-import {useState} from "react";
+import {useState, useContext, useEffect} from "react";
 import {useHistory} from 'react-router-dom';
 
+import UserContext from '../contexts/UserContext';
+
 export default function UserAndCart() {
+    const {user, setUser} = useContext(UserContext);
     const [openUserMenu, setOpenUserMenu] = useState(false);
     const [openCartMenu, setOpenCartMenu] = useState(false);
+    const [loggedUser, setLoggedUser] = useState(false);
     const history = useHistory();
+
+    useEffect(()=>{
+        if(user !== null){
+            setLoggedUser(true);
+        }
+    },[user, setUser, setLoggedUser ]);
 
     function goTo(path) {
         history.push(path);
+    }
+
+    function logOut() {
+        localStorage.clear();
+        setUser(null);
+        setLoggedUser(false);
     }
 
     return(
         <Menus>
             <UserMenu>
                 <button onClick={()=> {setOpenUserMenu(!openUserMenu); setOpenCartMenu(false)}}>Usuário</button>
-                {openUserMenu && 
+                {openUserMenu && !loggedUser &&
                     <Category last={false}>
-                        <button onClick={()=> setOpenUserMenu(!openUserMenu)}>Entrar</button>
+                        <button onClick={()=> {setOpenUserMenu(!openUserMenu); goTo('/login')}}>Entrar</button>
                     </Category>
                 }
-                {openUserMenu && 
-                    <Category last={false}>
-                        <button onClick={()=> setOpenUserMenu(!openUserMenu)}>Criar conta</button>
+                {openUserMenu && !loggedUser &&
+                    <Category last={true}>
+                        <button onClick={()=> {setOpenUserMenu(!openUserMenu); goTo('/signup')}}>Criar conta</button>
                     </Category>
                 }
-                {openUserMenu && 
+                {openUserMenu && loggedUser &&
                     <Category last={false}>
                         <button onClick={()=> setOpenUserMenu(!openUserMenu)}>Pedidos antigos</button>
                     </Category>
                 }
-                {openUserMenu && 
+                {openUserMenu && loggedUser &&
                     <Category last={true}>
-                        <button onClick={()=> setOpenUserMenu(!openUserMenu)}>sair</button>
+                        <button onClick={()=> {setOpenUserMenu(!openUserMenu); logOut()}}>Sair</button>
                     </Category>
                 }
             </UserMenu>
@@ -64,22 +80,23 @@ const UserMenu = styled.div`
     right: 160px;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
+    background: #438a0a;
     border: thin;
     border-radius: 5px;
     button {
         width: 120px;
-        background: none;
+        background: #53961d;
         border: none;
+        border-radius: 3px;
         cursor: pointer;
-        color: green;
+        color: #FFFFFF;
         padding: 5px;
     }
 `;
 
 const Category = styled.div`
-    background: #F7F7F7;
-    border-radius: ${props => props.last ? "0px 0px 5px 5px" : "0"};
+    background: #53961d;
+    border-radius: ${props => props.last ? "0px 0px 3px 3px" : "0"};
     :hover {
         opacity: .7;
     }
@@ -91,15 +108,16 @@ const CartMenu = styled.div`
     right: 20px;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
+    background: #438a0a;
     border: thin;
     border-radius: 5px;
     button {
         width: 120px;
-        background: none;
+        background: #53961d;
         border: none;
+        border-radius: 3px;
         cursor: pointer;
-        color: green;
+        color: #FFFFFF;
         padding: 5px;
     }
 `;
