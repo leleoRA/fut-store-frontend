@@ -8,10 +8,13 @@ import Footer from './Footer.js';
 
 export default function Catalog(props) {
     const [events, setEvents] = useState([]);
-    console.log(props.category)
 
     useEffect(() => {
-        const query = `?page=${props.category}`
+        let query = '';
+        
+        if (props.category !== undefined){
+            query = `?page=${props.category}`
+        }
         const request = axios.get(`http://localhost:4000/catalog${query}`)
 
         request.then(res => {
@@ -23,7 +26,7 @@ export default function Catalog(props) {
         <Body>
             <Header />
                 <Banner>
-                    {(props.category !== "All") ?
+                    {(props.pageTitle !== "Todos os clubes") ?
                         <>
                             <Icon>
                                 {(props.category === 'Nacional') ?

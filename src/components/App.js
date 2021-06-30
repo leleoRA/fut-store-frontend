@@ -16,7 +16,7 @@ export default function App() {
                         <Welcome />
                     </Route>
                     <Route path="/products/all" exact>
-                        <Catalog category={"All"} pageTitle={"Todos os clubes"}/>
+                        <Catalog pageTitle={"Todos os clubes"}/>
                     </Route>
                     <Route path="/products/national" exact>
                         <Catalog category={"Nacional"} pageTitle={"Clubes brasileiros"}/>
