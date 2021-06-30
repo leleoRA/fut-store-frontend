@@ -2,8 +2,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import UserContext from './contexts/UserContext';
 import { useState } from "react";
 
-import Welcome from "./Welcome.js";
-import Catalog from "./Catalog.js";
+import Welcome from "./Welcome";
+import Catalog from "./Catalog";
+import Product from "./Product";
 
 export default function App() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
@@ -23,6 +24,9 @@ export default function App() {
                     </Route>
                     <Route path="/products/international" exact>
                         <Catalog category={"Internacional"} pageTitle={"Clubes internacionais"}/>
+                    </Route>
+                    <Route path="/products/:id">
+                        <Product />
                     </Route>
                 </Switch>
             </BrowserRouter>
