@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import CategoriesMenu from "./CategoriesMenu.js";
 import UserAndCart from "./UserAndCart.js";
 
-export default function Header() {
+export default function Header(props) {
     return(
         <Body>
             <LeftMenu>
-                <CategoriesMenu />
+                <CategoriesMenu showProducts={props.showProducts}/>
             </LeftMenu>
             <Logo>NetShirts</Logo>
             <RightMenu>
@@ -24,6 +24,7 @@ const Body = styled.div`
     justify-content: space-between;
     align-items: center;
     position: sticky;
+    z-index: 10;
     top: 0;
     left: 0;
     background: #356e07;
