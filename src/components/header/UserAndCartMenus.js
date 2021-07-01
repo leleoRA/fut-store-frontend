@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 
 import UserContext from '../contexts/UserContext';
 
-export default function UserAndCart() {
+export default function UserAndCartMenus() {
     const {user, setUser} = useContext(UserContext);
     const [openUserMenu, setOpenUserMenu] = useState(false);
     const [openCartMenu, setOpenCartMenu] = useState(false);
