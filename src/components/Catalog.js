@@ -25,33 +25,33 @@ export default function Catalog(props) {
     return(
         <Body>
             <Header />
-                <Banner>
-                    {(props.pageTitle !== "Todos os clubes") ?
-                        <>
-                            <Icon>
-                                {(props.category === 'Nacional') ?
-                                    <GiBrazilFlag size="50px" color="#fff"/>
-                                :  
-                                    <GiEarthAfricaEurope size="50px" color="#fff" />
-                                }
-                            </Icon>
-                            <Separator></Separator>
-                            <h1>{props.pageTitle}</h1>
-                        </>
-                    :
+            <Banner>
+                {(props.pageTitle !== "Todos os clubes") ?
+                    <>
+                        <Icon>
+                            {(props.category === 'Nacional') ?
+                                <GiBrazilFlag size="50px" color="#fff"/>
+                            :  
+                                <GiEarthAfricaEurope size="50px" color="#fff" />
+                            }
+                        </Icon>
+                        <Separator></Separator>
                         <h1>{props.pageTitle}</h1>
-                    }
-                </Banner>
-                <Products>
-                    {events.map(e => (
-                        <Content>
-                            <img src={e.urlImageFront} alt={e.name}></img>
-                            <Info>{e.name}</Info>
-                            <Price>R${(e.price).replace(".",",")}</Price>
-                        </Content>
-                    ))}
-                </Products>
-                <Footer />
+                    </>
+                :
+                    <h1>{props.pageTitle}</h1>
+                }
+            </Banner>
+            <Products>
+                {events.map(e => (
+                    <Content>
+                        <img src={e.urlImageFront} alt={e.name}></img>
+                        <Info>{e.name}</Info>
+                        <Price>R${(e.price).replace(".",",")}</Price>
+                    </Content>
+                ))}
+            </Products>
+            <Footer />
         </Body>
     )
 }

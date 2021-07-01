@@ -6,6 +6,7 @@ import Welcome from "./Welcome.js";
 import LogIn from "./header/LogIn.js";
 import SignUp from "./header/SignUp.js";
 import Catalog from "./Catalog.js";
+import OldOrders from "./header/OldOrders.js";
 
 export default function App() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
@@ -31,6 +32,9 @@ export default function App() {
                     </Route>
                     <Route path="/products/international" exact>
                         <Catalog category={"Internacional"} pageTitle={"Clubes internacionais"}/>
+                    </Route>
+                    <Route path="/old-orders" exact>
+                        <OldOrders />
                     </Route>
                 </Switch>
             </BrowserRouter>
