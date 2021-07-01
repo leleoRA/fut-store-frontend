@@ -1,15 +1,22 @@
 import styled from 'styled-components';
+import {useHistory} from 'react-router-dom';
 
 import CategoriesMenu from "./CategoriesMenu.js";
 import UserAndCart from "./UserAndCart.js";
 
 export default function Header(props) {
+    const history = useHistory();
+
+    function goTo(path) {
+        history.push(path);
+    }
+
     return(
         <Body>
             <LeftMenu>
                 <CategoriesMenu showProducts={props.showProducts}/>
             </LeftMenu>
-            <Logo>NetShirts</Logo>
+            <Logo onClick={() => goTo('/')}>NetShirts</Logo>
             <RightMenu>
                 <UserAndCart />
             </RightMenu>
@@ -39,6 +46,7 @@ const Logo = styled.h1`
     font-size: 30px;
     font-weight: 700;
     color: #FFFFFF;
+    cursor: pointer;
 `;
 
 const RightMenu = styled.div`

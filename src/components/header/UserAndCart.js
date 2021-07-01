@@ -43,7 +43,7 @@ export default function UserAndCart() {
                 }
                 {openUserMenu && loggedUser &&
                     <Category last={false}>
-                        <button onClick={()=> setOpenUserMenu(!openUserMenu)}>Pedidos antigos</button>
+                        <button onClick={()=> {setOpenUserMenu(!openUserMenu); goTo('/old-orders')}}>Pedidos antigos</button>
                     </Category>
                 }
                 {openUserMenu && loggedUser &&
