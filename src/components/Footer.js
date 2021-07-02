@@ -15,7 +15,6 @@ export default function Footer(){
                 </Section>
                 <Section>
                     <h1>ACEITAMOS</h1>
-                    <img src="https://cdn0.iconfinder.com/data/icons/50-payment-system-icons-2/480/Boleto.png" alt="Boleto"/>
                     <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/363_Visa_Credit_Card_logo-256.png" alt="Cartão Visa"/>
                     <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/206_Mastercard_Credit_Card_logo_logos-256.png" alt="Cartão Mastercard"/>
                     <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/16_Amex_Credit_Card_logo_logos-256.png" alt="Cartão AmericanExpress"/>
@@ -37,12 +36,12 @@ export default function Footer(){
 
 const Main = styled.div`
     height: 230px;
-    background-color: #91c8ca;
+    background-color: #96BB7C;
     display: flex;
     align-items: space-around;
     flex-direction: column;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
-    margin-top: 20px;
+    margin-top: 40px;
 `;
 
 const Box = styled.div`

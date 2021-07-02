@@ -14,7 +14,7 @@ export default function Header() {
     return(
         <Body>
             <LeftMenu>
-                <CategoriesMenu />
+                <CategoriesMenu/>
             </LeftMenu>
             <Logo onClick={() => goTo('/')}>NetShirts</Logo>
             <RightMenu>
@@ -31,6 +31,7 @@ const Body = styled.div`
     justify-content: space-between;
     align-items: center;
     position: sticky;
+    z-index: 3;
     top: 0;
     left: 0;
     background: #356e07;
@@ -42,10 +43,10 @@ const LeftMenu = styled.div`
 `;
 
 const Logo = styled.h1`
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 50px;
     color: #FFFFFF;
     cursor: pointer;
+    font-family: 'Nova Flat';
 `;
 
 const RightMenu = styled.div`

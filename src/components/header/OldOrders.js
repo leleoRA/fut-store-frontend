@@ -45,7 +45,6 @@ export default function OlderOrders() {
 }
 
 const Body = styled.div`
-    height: 100vh;
     width: 100vw;
 `;
 

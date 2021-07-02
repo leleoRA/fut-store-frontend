@@ -88,6 +88,10 @@ video {
     font-family: 'Rajdhani', sans-serif;
 }
 
+strong{
+    font-weight: 700;
+}
+
 button{
     font-family: 'Rajdhani', sans-serif;
 }
@@ -135,4 +139,7 @@ table {
 
 * {
     box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
 }
+

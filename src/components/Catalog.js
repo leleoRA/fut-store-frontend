@@ -1,15 +1,20 @@
 import styled from 'styled-components';
 import { GiBrazilFlag, GiEarthAfricaEurope } from "react-icons/gi";
 import { useEffect, useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
+import { Link } from "react-router-dom";
 
 import Header from "./header/Header.js";
 import Footer from './Footer.js';
 
 export default function Catalog(props) {
-    const [events, setEvents] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
+        showProducts();
+    }, [props.category]) // eslint-disable-line react-hooks/exhaustive-deps
+    
+    function showProducts(){
         let query = '';
         
         if (props.category !== undefined){
@@ -18,10 +23,10 @@ export default function Catalog(props) {
         const request = axios.get(`http://localhost:4000/catalog${query}`)
 
         request.then(res => {
-            setEvents(res.data)
+            setProducts(res.data)
         })
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
-    
+    }
+
     return(
         <Body>
             <Header />
@@ -43,12 +48,14 @@ export default function Catalog(props) {
                 }
             </Banner>
             <Products>
-                {events.map(e => (
-                    <Content>
-                        <img src={e.urlImageFront} alt={e.name}></img>
-                        <Info>{e.name}</Info>
-                        <Price>R${(e.price).replace(".",",")}</Price>
-                    </Content>
+                {products.map(e => (
+                    <Link to={`/products/${e.id}`}>
+                        <Content>
+                            <img src={e.urlImageFront} alt={e.name}></img>
+                            <Info>{e.name}</Info>
+                            <Price>R${e.price}</Price>
+                        </Content>
+                    </Link>
                 ))}
             </Products>
             <Footer />
@@ -57,7 +64,6 @@ export default function Catalog(props) {
 }
 
 const Body = styled.div`
-    height: 100vh;
     width: 100vw;
 `;
 
@@ -114,6 +120,7 @@ const Content = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 
     img{ 
         height: 300px;
