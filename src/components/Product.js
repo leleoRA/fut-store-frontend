@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
@@ -23,13 +23,24 @@ export default function Product(){
     const [g, setG] = useState(false)
     const [product, setProduct] = useState([]);
     const [image, setImage] = useState('');
+    const [size, setSize] = useState("");
     const [modalIsOpen, setModalIsOPen] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    const price = parseInt(product.price)
+    const price = product.price;
     const image1 = product.urlImageFront;
     const image2 = product.urlImageBack;
     const { cart, setCart } = useContext(CartContext);
+    const history = useHistory();
+    let path = '';
 
+    if (product.category !== undefined){
+        if (product.category === "Nacional"){
+            path = `/national`
+        } else{
+            path = `/international` 
+        }
+    }
+    
     useEffect(() => {
         showProduct()
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -44,13 +55,19 @@ export default function Product(){
     }
 
     function toggleModal() {
-        modalIsOpen ? setModalIsOPen(false) : setModalIsOPen(true);
+        if (size!==""){
+            modalIsOpen ? setModalIsOPen(false) : setModalIsOPen(true);
+        }
     }
 
     function addCart(){
-        let actualCart = cart;
-        actualCart.push({img: product.urlImageFront, price: product.price, product: product.name});
-        setCart(actualCart);
+        if (size===""){
+            alert("Selecione um tamanho para prosseguir")
+        } else {
+            let actualCart = cart;
+            actualCart.push({img: product.urlImageFront, price: product.price, product: product.name, size});
+            setCart(actualCart);
+        }
     }
 
     function changeImage1(){
@@ -61,11 +78,16 @@ export default function Product(){
         setImage(image2)
     }
 
+    function goTo(path) {
+        setModalIsOPen(false);
+        history.push(path);
+    }
+
     return(
         <>
             <Header />
             <Path>
-                <p>Página Inicial {`>>>`} {(product.category ==="Nacional") ? "Clubes nacionais" : "Clubes internacionais"} {`>>>`} {product.team}</p>
+                <p><Link to="/">Página Inicial</Link> {`>>>`} <Link to={`/products${path}`}>{(product.category ==="Nacional") ? "Clubes nacionais" : "Clubes internacionais"}</Link> {`>>>`} {product.team}</p>
             </Path>
             <Body>  
                 <Section>
@@ -88,7 +110,7 @@ export default function Product(){
                 <VerticalSeparator></VerticalSeparator>
                 <Aside>
                     <h1>{product.name}</h1>
-                    <h2>R$ {(price).toFixed(2)}</h2>
+                    <h2>R$ {price}</h2>
                     <p>ou <strong>3x</strong> de <strong>R$ {(price/3).toFixed(2)}</strong> Sem juros</p>
                     <Division>
                         <Subtitle>
@@ -97,9 +119,9 @@ export default function Product(){
                         <Line></Line>
                     </Division>
                     <Sizes>
-                        <ShirtSize option={p} onClick={() => {setP(!p);setM(false);setG(false)}}>P</ShirtSize>
-                        <ShirtSize option={m} onClick={() => {setP(false);setM(!m);setG(false)}}>M</ShirtSize>
-                        <ShirtSize option={g} onClick={() => {setP(false);setM(false);setG(!g)}}>G</ShirtSize>
+                        <ShirtSize option={p} onClick={() => {setSize("P");setP(!p);setM(false);setG(false)}}>P</ShirtSize>
+                        <ShirtSize option={m} onClick={() => {setSize("M");setP(false);setM(!m);setG(false)}}>M</ShirtSize>
+                        <ShirtSize option={g} onClick={() => {setSize("G");setP(false);setM(false);setG(!g)}}>G</ShirtSize>
                     </Sizes>
                     <Buy onClick={() => {toggleModal();addCart()}}>
                         Comprar
@@ -115,14 +137,14 @@ export default function Product(){
                                 : `Produto adicionado ao carrinho`}
                             <Order>
                                 <img src={product.urlImageFront} alt={product.name}/>
-                                <p><strong>{product.name}</strong><br/>Tamanho: P<br/>Preço: R$ {product.price}</p>
+                                <p><strong>{product.name}</strong><br/>Tamanho: {size}<br/>Preço: R$ {product.price}</p>
                             </Order>
                         </ModalText>
                         <div>
                             <GoBackButton disabled={disabled} onClick={toggleModal}>
                                 Continuar comprando
                             </GoBackButton>
-                            <ConfirmButton disabled={disabled}>
+                            <ConfirmButton onClick={() => goTo("/cart")} disabled={disabled}>
                                 Ir para o carrinho
                             </ConfirmButton>
                         </div>
