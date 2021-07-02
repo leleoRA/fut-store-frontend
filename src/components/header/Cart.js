@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
@@ -16,11 +16,21 @@ export default function Cart() {
     const [cardNumber, setCardNumber] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [securityCode, setSecurityCode] = useState("");
-    let total = 0;
+    const [cartReload, setCartReload] = useState(true);
+    const [totalPrice, setTotalPrice] = useState(0);
 
-    function calcTotal() {
-        for(let i = 0; i < cart.length; i++) {total = total + cart[i].price}
+    useEffect(() => {
+        calcTotalPrice()
+    }, [setCart, cart, cartReload]);
+    
+    function calcTotalPrice() {
+        let newTotal = 0;
+        cart.forEach(p => {
+            newTotal = newTotal + p.price;
+        });
+        setTotalPrice(newTotal);
     }
+
     function buyItems(e) {
         e.preventDefault();
         if (cardName && cardNumber && expiryDate && securityCode){
@@ -42,14 +52,21 @@ export default function Cart() {
             request.catch((error)=> {
                 setIsLoading(false);
                 if(error.response.status === 403){
-                    alert('Por favor, preencha todos os campos corretamente!');
+                    alert('Por favor, preencha todos os dados de pagamento corretamente!');
                 }
             })
         } else {
-            alert('Por favor insira seu email e sua senha.');
+            alert('Por favor, não deixe nenhum campo em branco.');
         }
     }
-    calcTotal();
+    
+    function removeItem(i) {
+        let newCart = cart;
+        newCart.splice(i, 1);
+        setCart(newCart);
+        setCartReload(!cartReload);
+    }
+
     return(
         <Body>
             <Header />
@@ -57,17 +74,17 @@ export default function Cart() {
                 <Title>Seu carrinho</Title>
                 {cart.length >= 1 ?
                 cart.map((p, i) => (
-                    <Item>
-                        <ItemTitle key={i}>
+                    <Item cartReload={true} key={i}>
+                        <ItemTitle >
                             <img src={p.img} alt=""></img>
                             {p.product + " (" + p.size + ")"}
                         </ItemTitle>
                         <ItemInfo>
-                            <RemoveButton onClick={() => setCart([])}>Remover item</RemoveButton>
-                            <div>{"Valor: R$" + (p.price)}</div>
+                            <RemoveButton onClick={() => removeItem(i)}>Remover item</RemoveButton>
+                            <div>{"Valor: R$" + ((p.price).toFixed(2))}</div>
                         </ItemInfo>
                         {(i !== (cart.length - 1)) && <Spliter></Spliter>}
-                        {(i === (cart.length - 1)) && <TotalPrice>Valor total: R${parseInt(total).toFixed(2)}</TotalPrice>}
+                        {(i === (cart.length - 1)) && <TotalPrice>Valor total: R${totalPrice.toFixed(2)}</TotalPrice>}
                     </Item>
                 )) :
                 <NullMessage>Seu carrinho está vazio!</NullMessage>
@@ -155,7 +172,7 @@ const TotalPrice = styled.h1`
     display: flex;
     justify-content: end;
     margin-top: 50px;
-    margin-left: 25px;
+
     font-size: 20px;
     font-weight: 700;
 `;
