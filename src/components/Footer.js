@@ -37,7 +37,7 @@ export default function Footer(){
 
 const Main = styled.div`
     height: 230px;
-    background-color: #91c8ca;
+    background-color: #C6C6C6;
     display: flex;
     align-items: space-around;
     flex-direction: column;
