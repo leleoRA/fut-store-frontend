@@ -21,7 +21,7 @@ export default function Cart() {
 
     useEffect(() => {
         calcTotalPrice()
-    }, [setCart, cart, cartReload]);
+    }, [setCart, cart, cartReload]); // eslint-disable-line react-hooks/exhaustive-deps
     
     function calcTotalPrice() {
         let newTotal = 0;
