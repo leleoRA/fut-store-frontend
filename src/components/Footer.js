@@ -37,12 +37,12 @@ export default function Footer(){
 
 const Main = styled.div`
     height: 230px;
-    background-color: #C6C6C6;
+    background-color: #96BB7C;
     display: flex;
     align-items: space-around;
     flex-direction: column;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
-    margin-top: 20px;
+    margin-top: 40px;
 `;
 
 const Box = styled.div`

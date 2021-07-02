@@ -3,7 +3,7 @@ import {useState} from "react";
 import { useHistory} from 'react-router-dom';
 import {BsList} from 'react-icons/bs';
 
-export default function CategoriesMenu(props) {
+export default function CategoriesMenu() {
     const [openCategoriesMenu, setOpenCategoriesMenu] = useState(false);
     const history = useHistory();
 
