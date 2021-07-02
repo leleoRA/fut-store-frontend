@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {useState} from "react";
-import {useHistory} from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
+import {BsList} from 'react-icons/bs';
 
 export default function CategoriesMenu() {
     const [openCategoriesMenu, setOpenCategoriesMenu] = useState(false);
@@ -12,7 +13,7 @@ export default function CategoriesMenu() {
 
     return(
         <Menu>
-            <button onClick={()=> setOpenCategoriesMenu(!openCategoriesMenu)}>Categorias</button>
+            <button onClick={()=> setOpenCategoriesMenu(!openCategoriesMenu)}><BsList /> Categorias</button>
             {openCategoriesMenu && 
                 <Category last={false}>
                     <button onClick={()=> {setOpenCategoriesMenu(!openCategoriesMenu); goTo('/products/national')}}>Nacionais</button>
@@ -42,7 +43,11 @@ const Menu = styled.div`
     border: thin;
     border-radius: 5px;
     button {
-        width: 120px;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 110px;
         background: #53961d;
         border: none;
         border-radius: 3px;

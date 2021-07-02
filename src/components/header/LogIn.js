@@ -83,7 +83,7 @@ const LogInBox = styled.div`
 `;
 
 const Title = styled.h1`
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Nova Flat';
     font-size: 32px;
     font-weight: 700;
     line-height: 50px;
@@ -123,7 +123,7 @@ const Form = styled.form`
         box-shadow: inset 4px 0px 0px #438a0a;
     }
     p{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Rajdhani', sans-serif;
         font-size: 15px;
         font-weight: 700;
         line-height: 18px;
