@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import {useState} from "react";
 import { useHistory} from 'react-router-dom';
 
-export default function CategoriesMenu(props) {
+export default function CategoriesMenu() {
     const [openCategoriesMenu, setOpenCategoriesMenu] = useState(false);
     const history = useHistory();
-    const showProducts = props.showProducts;
 
     function goTo(path) {
         history.push(path);

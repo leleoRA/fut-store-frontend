@@ -12,7 +12,7 @@ export default function Catalog(props) {
 
     useEffect(() => {
         showProducts();
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [props.category]) // eslint-disable-line react-hooks/exhaustive-deps
     
     function showProducts(){
         let query = '';
@@ -29,7 +29,7 @@ export default function Catalog(props) {
 
     return(
         <Body>
-            <Header showProducts={showProducts}/>
+            <Header/>
             <Banner>
                 {(props.pageTitle !== "Todos os clubes") ?
                     <>
@@ -53,7 +53,7 @@ export default function Catalog(props) {
                         <Content>
                             <img src={e.urlImageFront} alt={e.name}></img>
                             <Info>{e.name}</Info>
-                            <Price>R${(e.price).replace(".",",")}</Price>
+                            <Price>R${e.price}</Price>
                         </Content>
                     </Link>
                 ))}

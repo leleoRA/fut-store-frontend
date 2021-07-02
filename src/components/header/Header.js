@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import CategoriesMenu from "./CategoriesMenu.js";
 import UserAndCart from "./UserAndCart.js";
 
-export default function Header(props) {
+export default function Header() {
     const history = useHistory();
 
     function goTo(path) {
@@ -14,7 +14,7 @@ export default function Header(props) {
     return(
         <Body>
             <LeftMenu>
-                <CategoriesMenu showProducts={props.showProducts}/>
+                <CategoriesMenu/>
             </LeftMenu>
             <Logo onClick={() => goTo('/')}>NetShirts</Logo>
             <RightMenu>
@@ -43,10 +43,10 @@ const LeftMenu = styled.div`
 `;
 
 const Logo = styled.h1`
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 50px;
     color: #FFFFFF;
     cursor: pointer;
+    font-family: 'Nova Flat';
 `;
 
 const RightMenu = styled.div`

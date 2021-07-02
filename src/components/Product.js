@@ -1,23 +1,34 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
+import CartContext from "./contexts/CartContext";
 import Header from "./header/Header"
 import Footer from './Footer';
+import {
+    StyledModal,
+    ModalText,
+    GoBackButton,
+    ConfirmButton,
+    Order
+} from "./StyledModal";
 
 export default function Product(){
     const { id } = useParams();
-    const [selectedP, setSelectedP] = useState(false)
-    const [selectedM, setSelectedM] = useState(false)
-    const [selectedG, setSelectedG] = useState(false)
+    const [p, setP] = useState(false)
+    const [m, setM] = useState(false)
+    const [g, setG] = useState(false)
     const [product, setProduct] = useState([]);
     const [image, setImage] = useState('');
+    const [modalIsOpen, setModalIsOPen] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     const price = parseInt(product.price)
     const image1 = product.urlImageFront;
     const image2 = product.urlImageBack;
+    const { cart, setCart } = useContext(CartContext);
 
     useEffect(() => {
         showProduct()
@@ -32,16 +43,14 @@ export default function Product(){
         })
     }
 
-    function toggleOptionP(){
-        setSelectedP(!selectedP)
+    function toggleModal() {
+        modalIsOpen ? setModalIsOPen(false) : setModalIsOPen(true);
     }
 
-    function toggleOptionM(){
-        setSelectedM(!selectedM)
-    }
-
-    function toggleOptionG(){
-        setSelectedG(!selectedG)
+    function addCart(){
+        let actualCart = cart;
+        actualCart.push({img: product.urlImageFront, price: product.price, product: product.name});
+        setCart(actualCart);
     }
 
     function changeImage1(){
@@ -56,7 +65,7 @@ export default function Product(){
         <>
             <Header />
             <Path>
-                <p>Página Inicial {`>>>`} {(product.team ==="Nacional") ? "Clubes nacionais" : "Clubes internacionais"} {`>>>`} {product.team}</p>
+                <p>Página Inicial {`>>>`} {(product.category ==="Nacional") ? "Clubes nacionais" : "Clubes internacionais"} {`>>>`} {product.team}</p>
             </Path>
             <Body>  
                 <Section>
@@ -79,7 +88,7 @@ export default function Product(){
                 <VerticalSeparator></VerticalSeparator>
                 <Aside>
                     <h1>{product.name}</h1>
-                    <h2>R$ {(price).toFixed(2).replace(".",",")}</h2>
+                    <h2>R$ {(price).toFixed(2)}</h2>
                     <p>ou <strong>3x</strong> de <strong>R$ {(price/3).toFixed(2)}</strong> Sem juros</p>
                     <Division>
                         <Subtitle>
@@ -88,13 +97,36 @@ export default function Product(){
                         <Line></Line>
                     </Division>
                     <Sizes>
-                        <ShirtSize option={selectedP} onClick={toggleOptionP}>P</ShirtSize>
-                        <ShirtSize option={selectedM} onClick={toggleOptionM}>M</ShirtSize>
-                        <ShirtSize option={selectedG} onClick={toggleOptionG}>G</ShirtSize>
+                        <ShirtSize option={p} onClick={() => {setP(!p);setM(false);setG(false)}}>P</ShirtSize>
+                        <ShirtSize option={m} onClick={() => {setP(false);setM(!m);setG(false)}}>M</ShirtSize>
+                        <ShirtSize option={g} onClick={() => {setP(false);setM(false);setG(!g)}}>G</ShirtSize>
                     </Sizes>
-                    <Buy>
+                    <Buy onClick={() => {toggleModal();addCart()}}>
                         Comprar
                     </Buy>
+                    <StyledModal
+                        isOpen={modalIsOpen}
+                        onRequestClose={toggleModal}
+                        contentLabel="Erase Modal"
+                    >
+                        <ModalText>
+                            {disabled
+                                ? ""
+                                : `Produto adicionado ao carrinho`}
+                            <Order>
+                                <img src={product.urlImageFront} alt={product.name}/>
+                                <p><strong>{product.name}</strong><br/>Tamanho: P<br/>Preço: R$ {product.price}</p>
+                            </Order>
+                        </ModalText>
+                        <div>
+                            <GoBackButton disabled={disabled} onClick={toggleModal}>
+                                Continuar comprando
+                            </GoBackButton>
+                            <ConfirmButton disabled={disabled}>
+                                Ir para o carrinho
+                            </ConfirmButton>
+                        </div>
+                    </StyledModal>
                     <Description>
                         <h3>Mais detalhes</h3>
                         <p>{product.description}</p>
@@ -180,7 +212,7 @@ const Principal = styled.div`
 `;
 
 const VerticalSeparator = styled.div`
-    height: 100vh;
+    height: 590px;
     width: 2px;
     background-color: #c9c3c3;
     margin: 18px;
