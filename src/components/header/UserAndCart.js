@@ -8,7 +8,7 @@ import {BsBagFill} from 'react-icons/bs';
 import UserContext from '../contexts/UserContext';
 import CartContext from '../contexts/CartContext';
 
-export default function UserAndCartMenus() {
+export default function UserAndCart() {
     const {user, setUser} = useContext(UserContext);
     const {setCart} = useContext(CartContext);
     const [openUserMenu, setOpenUserMenu] = useState(false);

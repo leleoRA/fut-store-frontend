@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {useHistory} from 'react-router-dom';
 
 import CategoriesMenu from "./CategoriesMenu.js";
-import UserAndCartMenus from "./UserAndCartMenus.js";
+import UserAndCart from "./UserAndCart.js";
 
 export default function Header() {
     const history = useHistory();
@@ -18,7 +18,7 @@ export default function Header() {
             </LeftMenu>
             <Logo onClick={() => goTo('/')}>NetShirts</Logo>
             <RightMenu>
-                <UserAndCartMenus />
+                <UserAndCart />
             </RightMenu>
         </Body>
     )
