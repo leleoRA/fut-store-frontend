@@ -26,7 +26,7 @@ export default function Cart() {
     function calcTotalPrice() {
         let newTotal = 0;
         cart.forEach(p => {
-            newTotal = newTotal + parseInt(p.price);
+            newTotal = newTotal + (parseInt((p.price*100))/100);
         });
         setTotalPrice(newTotal);
     }
