@@ -18,7 +18,7 @@ export default function LogIn() {
         if (validateEmail(email) && password){
             setIsLoading(true);
             const body = {email, password};
-            const request = axios.post('http://localhost:4000/log-in', body);
+            const request = axios.post('https://back-netshirts.herokuapp.com/log-in', body);
             request.then((response)=> {
                 setIsLoading(false);
                 localStorage.setItem('user',JSON.stringify({

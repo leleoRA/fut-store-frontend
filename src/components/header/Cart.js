@@ -43,7 +43,7 @@ export default function Cart() {
                 expiryDate,
                 securityCode
             };
-            const request = axios.post('http://localhost:4000/new-purchase', body);
+            const request = axios.post('https://back-netshirts.herokuapp.com/new-purchase', body);
             request.then((response)=> {
                 setIsLoading(false);
                 alert("Compra efetuada com sucesso!");

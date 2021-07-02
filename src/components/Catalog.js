@@ -20,7 +20,7 @@ export default function Catalog(props) {
         if (props.category !== undefined){
             query = `?page=${props.category}`
         }
-        const request = axios.get(`http://localhost:4000/catalog${query}`)
+        const request = axios.get(`https://back-netshirts.herokuapp.com/catalog${query}`)
 
         request.then(res => {
             setProducts(res.data)

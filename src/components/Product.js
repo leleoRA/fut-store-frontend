@@ -46,7 +46,7 @@ export default function Product(){
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     function showProduct(){
-        const request = axios.get(`http://localhost:4000/products/${id}`)
+        const request = axios.get(`https://back-netshirts.herokuapp.com/products/${id}`)
 
         request.then(res => {
             setProduct(res.data)

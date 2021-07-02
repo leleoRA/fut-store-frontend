@@ -22,7 +22,7 @@ export default function SignUp() {
                 password,
                 username
             };
-            const request = axios.post('http://localhost:4000/sign-up', body);
+            const request = axios.post('https://back-netshirts.herokuapp.com/sign-up', body);
             request.then((response)=> {
                 setIsLoading(false);
                 alert("Cadastro realizado com sucesso! Por favor, efetue login em sua nova conta");
