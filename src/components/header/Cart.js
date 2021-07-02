@@ -81,10 +81,10 @@ export default function Cart() {
                         </ItemTitle>
                         <ItemInfo>
                             <RemoveButton onClick={() => removeItem(i)}>Remover item</RemoveButton>
-                            <div>{"Valor: R$" + ((p.price).toFixed(2))}</div>
+                            <div>{"Valor: R$" + (p.price)}</div>
                         </ItemInfo>
                         {(i !== (cart.length - 1)) && <Spliter></Spliter>}
-                        {(i === (cart.length - 1)) && <TotalPrice>Valor total: R${totalPrice.toFixed(2)}</TotalPrice>}
+                        {(i === (cart.length - 1)) && <TotalPrice>Valor total: R${totalPrice}</TotalPrice>}
                     </Item>
                 )) :
                 <NullMessage>Seu carrinho está vazio!</NullMessage>
