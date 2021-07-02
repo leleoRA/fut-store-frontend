@@ -12,7 +12,7 @@ export default function OlderOrders() {
     console.log(user.userId);
 
     useEffect(() => {
-        const request = axios.get(`https://back-netshirts.herokuapp.com/${user.userId}`);
+        const request = axios.get(`https://back-netshirts.herokuapp.com/old-orders/${user.userId}`);
         request.then(res => {
             console.log(res.data);
             setOldOrders(res.data)
